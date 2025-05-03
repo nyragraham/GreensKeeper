@@ -1,0 +1,231 @@
+/* Base layout */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f6f4f1;
+    color: #312A20;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #9C8B83;
+    padding: 1em 0;
+    color: white;
+}
+
+header h1 {
+    margin: 1em;
+}
+h2 {
+    font-size: 5rem;
+    color: #7C8D7D;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+nav {
+    margin-top: 0.5em;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    margin: 0 1em;
+    font-weight: bold;
+}
+
+main {
+    padding: 2em;
+    position: relative;
+}
+
+/* Camera feed styling */
+.camera-feed img {
+    width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* Shelf and plant slots */
+.shelf-container {
+    position: relative;
+    margin-top: 3em;
+}
+
+.shelf-board {
+    width: 80%;
+    height: 20px;
+    background-color: #8C873E;
+    margin: 1em auto;
+    border-radius: 10px;
+}
+
+.plant-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    margin: 2em 0;
+}
+
+.plant-slot {
+    background-color: #DA9365;
+    padding: 1.5em;
+    border-radius: 15px;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.2s ease-in-out;
+}
+
+.plant-slot:hover {
+    transform: scale(1.05);
+}
+
+.plant-icon {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+.plant-name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Plant page info */
+.plant-info {
+    margin-top: 2em;
+}
+
+.plant-photo {
+    width: 300px;
+    border-radius: 15px;
+    margin-bottom: 1em;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.care-data {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    margin: 2em 0;
+}
+
+.care-card {
+    background-color: #59551D;
+    color: white;
+    padding: 1em;
+    border-radius: 10px;
+    width: 160px;
+    font-size: 1em;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Sensor cards */
+.sensor-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+    margin-top: 2em;
+}
+
+.sensor-card {
+    background-color: #8C873E;
+    color: white;
+    padding: 1em;
+    border-radius: 10px;
+    width: 160px;
+    font-size: 1.1em;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Manual control buttons */
+.control-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 3em;
+}
+
+.control-button {
+    display: inline-block;
+    padding: 1em 2em;
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    transition: transform 0.15s ease-in-out;
+}
+
+.control-button:hover {
+    transform: scale(1.05);
+}
+
+.green {
+    background-color: #59551D;
+}
+
+.brown {
+    background-color: #312A20;
+}
+
+.orange {
+    background-color: #DA9365;
+}
+
+.yellow {
+    background-color: #8C873E;
+}
+
+/* Status Section */
+.status-section {
+    margin-top: 4em;
+}
+
+.status-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+    margin-top: 1em;
+    flex-wrap: wrap;
+}
+
+.status-card {
+    background-color: #9C8B83;
+    color: white;
+    padding: 1em;
+    border-radius: 10px;
+    width: 160px;
+    font-size: 1.1em;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Assign page form */
+.assign-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    margin-top: 3em;
+}
+
+.assign-form label {
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+.assign-form select {
+    padding: 0.5em;
+    border-radius: 8px;
+    font-size: 1em;
+    width: 200px;
+}

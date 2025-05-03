@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ plant.name }} – GreensKeeper</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    body {
+      background-color: #F0EFEB;
+      font-family: "Times New Roman", serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #C2CCD6;
+      padding: 2rem 1rem 2rem;
+    }
+    h1 {
+      margin-bottom: 3rem;
+      color: #7C8D7D;
+      font-size: 2.5rem;
+    }
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .nav a {
+      background-color: #B294A0;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .nav a:hover {
+      background-color: #D9966E;
+      transform: scale(1.05);
+    }
+    .plant-image img {
+      width: 250px;
+      margin: 2rem auto 1rem;
+      border-radius: 10px;
+    }
+    .info-box, .status-box {
+      background: #ffffff;
+      margin: 1.5rem auto;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      text-align: left;
+    }
+    .status-item {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+    }
+    h2 {
+      color: #7C8D7D;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GreensKeeper</h1>
+    <div class="nav">
+      <a href="/">home</a>
+      <a href="/manual">manual</a>
+      <a href="/assign">assign</a>
+    </div>
+  </header>
+
+  <h2>{{ plant.name }}</h2>
+
+  <div class="plant-image">
+    <img src="/static/plant_images/{{ plant.image }}" alt="Plant image">
+  </div>
+  
+  <div class="info-box">
+    <p><strong>Sunlight:</strong> {{ plant.sunlight_hours }} hours/day</p>
+    <p><strong>Ideal Humidity:</strong> {{ plant.ideal_humidity }}%</p>
+  </div>
+  
+  <h2>Care Instructions</h2>
+  <p>{{ plant.care_blurb }}</p>
+
+  <div class="status-box">
+    <div class="status-item">☀️ Light: {{ light_runtime }}</div>
+    <div class="status-item">💧 Humidity: {{ humidity }}%</div>
+  </div>
+</body>
+</html>

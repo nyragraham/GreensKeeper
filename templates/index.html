@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GreensKeeper – Home</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    body {
+      background-color: #F0EFEB;
+      font-family: "Times New Roman", serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #C2CCD6;
+      padding: 2rem 1rem 2.5rem;
+    }
+    h1 {
+      margin-bottom: 1rem;
+      color: #7C8D7D;
+      font-size: 2.5rem;
+    }
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .nav a {
+      background-color: #B294A0;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .nav a:hover {
+      background-color: #D9966E;
+      transform: scale(1.05);
+    }
+    .slot-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem auto;
+      flex-wrap: wrap;
+    }
+    .slot-box {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      width: 160px;
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .slot-box:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+    .slot-box a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+    }
+    .slot-box div:first-child {
+      font-size: 60px;
+      margin-bottom: 0.75rem;
+    }
+    .slot-label {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      color: #5c5442;
+    }
+    .status-section {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin: 2rem auto 3rem;
+      padding: 2rem;
+      background: #fffef5;
+      border-radius: 18px;
+      box-shadow: 0 0 14px rgba(0,0,0,0.08);
+      max-width: 1000px;
+    }
+    .status-card {
+      background: #fff;
+      padding: 1.5rem 2rem;
+      border-radius: 14px;
+      border: 2px solid #9C8B83;
+      min-width: 200px;
+      font-weight: bold;
+      color: #312A20;
+      font-size: 1.1rem;
+    }
+    .camera-box {
+      margin: 2rem auto 4rem;
+    }
+    .camera-box img {
+      border-radius: 14px;
+      width: 320px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GreensKeeper</h1>
+    <div class="nav">
+      <a href="/">home</a>
+      <a href="/manual">manual</a>
+      <a href="/assign">assign</a>
+    </div>
+  </header>
+
+  <div class="slot-grid">
+    {% for slot_id, plant_key in shelf_assignments.items() %}
+    <div class="slot-box">
+      <a href="/plant/{{ slot_id }}">
+        <div>🪴</div>
+        <div>{{ plant_db[plant_key].name }}</div>
+        <div class="slot-label">Slot {{ slot_id }}</div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <h2>System Status</h2>
+  <div class="status-section">
+    <div class="status-card">Pump 1: {{ statuses.pump1|capitalize }}</div>
+    <div class="status-card">Light 1: {{ statuses.light_emoji }} {{ statuses.light1|capitalize }}</div>
+  </div>
+
+  <div class="camera-box">
+    <img src="/video_feed" alt="Live camera feed">
+  </div>
+</body>
+</html>
