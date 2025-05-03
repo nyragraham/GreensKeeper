@@ -1,0 +1,33 @@
+{
+    "plants": {
+      "basil": {
+        "name": "Basil",
+        "care_blurb": "Water every 2-3 days. Loves sunlight.",
+        "sunlight_hours": 6,
+        "ideal_humidity": 50,
+        "image": "basil.jpg"
+      },
+      "mint": {
+        "name": "Mint",
+        "care_blurb": "Keep soil moist. Partial sunlight preferred.",
+        "sunlight_hours": 4,
+        "ideal_humidity": 60,
+        "image": "mint.jpg"
+      },
+      "rosemary": {
+        "name": "Rosemary",
+        "care_blurb": "Allow soil to dry between watering. Needs full sun.",
+        "sunlight_hours": 8,
+        "ideal_humidity": 40,
+        "image": "rosemary.jpg"
+      },
+      "cactus": {
+        "name": "Cactus",
+        "care_blurb": "Water sparingly. Needs full bright sunlight.",
+        "sunlight_hours": 10,
+        "ideal_humidity": 30,
+        "image": "cactus.jpg"
+      }
+    }
+  }
+  
