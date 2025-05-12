@@ -12,6 +12,8 @@ from adafruit_ads1x15.ads1115 import ADS1115
 from adafruit_ads1x15.analog_in import AnalogIn
 import adafruit_ads1x15.ads1115 as ADS
 import RPi.GPIO as GPIO
+from datetime import datetime
+
 
 app = Flask(__name__)
 
@@ -37,7 +39,7 @@ GPIO.setup(PUMP_PIN, GPIO.OUT)
 i2c = busio.I2C(board.SCL, board.SDA)
 pca = PCA9685(i2c)
 pca.frequency = 1000
-LIGHT_CHANNEL = 0
+LIGHT_CHANNEL = 15
 
 brightness_levels = {
     "off": 0,
@@ -71,6 +73,29 @@ def generate_frames():
         frame = buffer.tobytes()
         yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+def read_last_watered(slot):
+    try:
+        with open("last_watered.json", "r") as f:
+            data = json.load(f)
+            time_str = data.get(str(slot))
+            if time_str:
+                dt = datetime.fromisoformat(time_str)
+                days_ago = (datetime.now() - dt).days
+                return f"{days_ago} days ago"
+    except:
+        pass
+    return "N/A"
+
+def update_last_watered(slot=1):
+    try:
+        with open("last_watered.json", "r") as f:
+            data = json.load(f)
+    except:
+        data = {}
+    data[str(slot)] = datetime.now().isoformat()
+    with open("last_watered.json", "w") as f:
+        json.dump(data, f)
+
 @app.route('/')
 def index():
     statuses = get_status()
@@ -93,8 +118,12 @@ def plant_page(plant_id):
 
     light_status = read_file_value("light_status.txt", "off")
     light_display = f"{light_status.capitalize()} ({light_hours} hrs)" if light_status != "off" else "Off"
+    last_watered = read_last_watered(plant_id)
+    watering_now = read_file_value("pump_status.txt", "off") == "on"
 
-    return render_template('plant.html', plant=plant, plant_id=plant_id, humidity=humidity, light_runtime=light_display)
+
+
+    return render_template('plant.html', plant=plant, plant_id=plant_id, humidity=humidity, light_runtime=light_display, last_watered=last_watered, watering_now=watering_now)
 
 @app.route('/manual')
 def manual_control():
@@ -119,8 +148,16 @@ def video_feed():
 @app.route('/pump_on')
 def pump_on():
     with open("pump_status.txt", "w") as f:
-        f.write("on")
+        f.write("on")  # set immediately
+
     GPIO.output(PUMP_PIN, GPIO.HIGH)
+    time.sleep(2)
+    GPIO.output(PUMP_PIN, GPIO.LOW)
+
+    with open("pump_status.txt", "w") as f:
+        f.write("off")  # set to off afterward
+
+    update_last_watered(slot=1)
     return redirect(url_for('manual_control'))
 
 @app.route('/pump_off')
@@ -129,6 +166,7 @@ def pump_off():
         f.write("off")
     GPIO.output(PUMP_PIN, GPIO.LOW)
     return redirect(url_for('manual_control'))
+
 
 @app.route('/light/<level>')
 def light_control(level):
